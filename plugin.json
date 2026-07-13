@@ -1,0 +1,27 @@
+{
+  "name": "embroidery-viewer",
+  "version": "0.1.0",
+  "protocol": 1,
+  "description": "Preview popular machine-embroidery designs as color stitch paths.",
+  "exec": ["python3", "./embroidery_viewer.py"],
+  "runtime": { "kind": "python" },
+  "capabilities": {
+    "viewer": {
+      "extensions": ["pes", "pec", "dst", "jef", "exp", "vp3", "xxx", "sew"],
+      "priority": 60
+    },
+    "thumbnail": {
+      "extensions": ["pes", "pec", "dst", "jef", "exp", "vp3", "xxx", "sew"],
+      "priority": 60
+    },
+    "converter": {
+      "inputs": ["pes", "pec", "dst", "jef", "exp", "vp3", "xxx", "sew"],
+      "outputs": ["pes", "pec", "dst", "jef", "exp", "vp3", "xxx", "png", "svg"],
+      "priority": 60
+    }
+  },
+  "platforms": ["macos", "linux", "windows"],
+  "publisher": "Commander Community",
+  "homepage": "https://github.com/enver/embroidery-plugin",
+  "license": "MIT"
+}
