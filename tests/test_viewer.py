@@ -28,7 +28,8 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(result["kind"], "html")
         self.assertIn("<svg", result["html"])
         self.assertIn("#cc3366", result["html"])
-        self.assertIn("sample&lt;&amp;.pes", result["html"])
+        self.assertNotIn("sample&lt;&amp;.pes", result["html"])
+        self.assertEqual(result["meta"], "10.0 × 10.0 mm · 3 stitches · 1 colors")
         self.assertNotIn("<script", result["html"])
 
     def test_renders_base64_svg_thumbnail(self):

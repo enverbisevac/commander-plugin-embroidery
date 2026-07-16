@@ -1,6 +1,6 @@
 {
   "name": "embroidery-viewer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "protocol": 1,
   "description": "Preview popular machine-embroidery designs as color stitch paths.",
   "exec": ["python3", "./embroidery_viewer.py"],

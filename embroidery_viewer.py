@@ -75,7 +75,7 @@ def render_svg(pattern, filename):
     width = max(max_x - min_x, 1.0)
     height = max(max_y - min_y, 1.0)
     pad = max(width, height) * 0.04 + 2
-    blocks, sampled = decimate(blocks)
+    blocks, _ = decimate(blocks)
 
     paths = []
     for points, color in blocks:
@@ -91,20 +91,14 @@ def render_svg(pattern, filename):
     )
     color_count = max(len(getattr(pattern, "threadlist", [])), len(blocks))
     size_mm = "%.1f × %.1f mm" % (width / 10.0, height / 10.0)
-    note = " · preview simplified" if sampled else ""
-    title = html.escape(os.path.basename(filename))
     view_box = "%.2f %.2f %.2f %.2f" % (
         min_x - pad, min_y - pad, width + 2 * pad, height + 2 * pad
     )
     document = (
-        '<div style="font-family:system-ui,sans-serif;color:#d8dee9">'
-        '<div style="display:flex;gap:18px;align-items:baseline;margin:0 0 12px">'
-        '<strong style="font-size:16px">%s</strong>'
-        '<span style="opacity:.72">%s · %s stitches · %s colors%s</span></div>'
         '<div style="background:#f8f5ef;border-radius:8px;padding:16px;text-align:center">'
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="%s" '
-        'style="display:block;width:100%%;height:auto;max-height:72vh">%s</svg></div></div>'
-        % (title, size_mm, format(stitch_count, ","), color_count, note, view_box, "".join(paths))
+        'style="display:block;width:100%%;height:auto;max-height:72vh">%s</svg></div>'
+        % (view_box, "".join(paths))
     )
     meta = "%s · %s stitches · %s colors" % (size_mm, format(stitch_count, ","), color_count)
     return {"ok": True, "kind": "html", "html": document, "meta": meta}
